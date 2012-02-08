@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping default-lazy="false">
+    <class name="neu.edu.model.Student" table="STUDENT">
+        <id name="studentId" type="int">
+            <column name="STUDENTID" unique="true"/>
+            <generator class="native" />
+        </id>
+        <property name="studentName" type="string">
+            <column name="STUDENTNAME" />
+        </property>
+        <property name="email" type="string">
+            <column name="EMAIL" />
+        </property>
+		<property name="password" type="string">
+            <column name="PASSWORD" />
+        </property>
+        <property name="gender" type="string">
+            <column name="GENDER" />
+        </property>
+        <property name="birthday" type="string">
+            <column name="BIRTHDAY" />
+        </property>
+        <many-to-one name="major" class="neu.edu.model.Major" cascade="all" not-null="false">
+            <column name="MAJORID" />
+        </many-to-one>
+        <property name="aboutMe" type="string">
+            <column name="ABOUTME" />
+        </property>
+        <property name="photo" type="binary" not-null="false" column="PHOTO" length="100000" />
+		<set name="courses" table="STUDENT_COURSE" cascade="all"  >
+            <key>
+                <column name="STUDENTID" />
+            </key>
+            <many-to-many  column="COURSEID"  class="neu.edu.model.Course" />
+        </set>
+    </class>
+</hibernate-mapping>

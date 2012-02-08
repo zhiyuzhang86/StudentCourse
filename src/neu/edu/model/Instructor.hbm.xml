@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping default-lazy="false">
+    <class name="neu.edu.model.Instructor" table="INSTRUCTOR">
+        <id name="instructorId" type="int">
+            <column name="INSTRUCTORID" />
+            <generator class="native" />
+        </id>
+        <property name="instructorName" type="string">
+            <column name="INSTRUCTORNAME" />
+        </property>
+        <property name="email" type="string">
+            <column name="EMAIL" />
+        </property>
+		<property name="password" type="string">
+            <column name="PASSWORD" />
+        </property>
+        <set name="courses" cascade="all" >
+            <key>
+                <column name="INSTRUCTORID" />
+            </key>
+            <one-to-many   class="neu.edu.model.Course" />
+        </set>
+    </class>
+</hibernate-mapping>

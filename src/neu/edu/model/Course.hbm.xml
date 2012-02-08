@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping default-lazy="false" >
+    <class name="neu.edu.model.Course" table="COURSE">
+        <id name="courseId" type="int">
+            <column name="COURSEID"  />
+            <generator class="native" />
+        </id>
+        <property name="courseName" type="string">
+            <column name="COURSENAME" />
+        </property>
+        <property name="credit" type="int">
+            <column name="CREDIT" />
+        </property>
+        <property name="capacity" type="int">
+            <column name="CAPACITY" />
+        </property>
+        
+		
+       <many-to-one name="instructor" column="INSTRUCTORID" not-null="false"  class="neu.edu.model.Instructor" />
+	   
+	   <set name="students" table="STUDENT_COURSE"  cascade="all"  >
+            <key>
+                <column name="COURSEID" />
+            </key>
+            <many-to-many  column="STUDENTID"  class="neu.edu.model.Student" />
+	   </set>
+      
+    </class>
+</hibernate-mapping>
